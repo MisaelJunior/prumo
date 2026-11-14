@@ -1,0 +1,8 @@
+name: Deploy
+on: workflow_dispatch
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - run: curl -fsS -X POST "${{ secrets.RENDER_BACKEND_HOOK }}"
+      - run: curl -fsS -X POST "${{ secrets.RENDER_FRONTEND_HOOK }}"
