@@ -1,111 +1,237 @@
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+  --fundo: #f7f7f4;
+  --bege: #f3ede2;
+  --borda: #e6dccb;
+  --botao: #d9c9ac;
+  --texto: #2f2f2d;
+  --suave: #8a857c;
+  --erro: #c0766b;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
-
-body {
-  margin: 0;
-}
-
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
+* {
   box-sizing: border-box;
 }
-
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
-
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
+body {
   margin: 0;
+  font-family: Inter, system-ui, "Segoe UI", sans-serif;
+  background: var(--fundo);
+  color: var(--texto);
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+.lateral {
+  width: 220px;
+  background: var(--bege);
+  padding: 28px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+.logo {
+  margin: 0;
+  font-size: 26px;
+}
+.logo-sub {
+  margin: 4px 0 28px;
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  color: var(--suave);
+}
+.aba {
+  display: flex;
+  gap: 10px;
+  padding: 10px 12px;
+  margin-bottom: 4px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  color: var(--texto);
+  text-decoration: none;
+  font-size: 14px;
+}
+.aba.ativa {
+  background: #fff;
+  border-color: var(--borda);
+  font-weight: 600;
+}
+.usuario {
+  font-size: 14px;
+  font-weight: 500;
+}
+.conteudo {
+  flex: 1;
+  min-width: 0;
+}
+.topo {
+  display: flex;
+  justify-content: space-between;
+  padding: 18px 36px;
+  font-size: 12px;
+  color: var(--suave);
+  border-bottom: 1px solid var(--borda);
+}
+.pagina {
+  padding: 32px 36px;
+  max-width: 1100px;
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+h2 {
+  margin: 0;
+  font-size: 28px;
+}
+.sub {
+  margin: 6px 0 0;
+  color: var(--suave);
+  font-size: 14px;
+}
+.cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+
+.botao,
+.botao-claro {
+  border-radius: 12px;
+  padding: 11px 18px;
+  font: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  color: var(--texto);
+}
+.botao {
+  background: var(--botao);
+  border: 0;
+}
+.botao-claro {
+  background: #fff;
+  border: 1px solid var(--borda);
+}
+.link {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  font-size: 13px;
+  color: var(--suave);
+  cursor: pointer;
+  text-align: left;
+}
+
+.busca {
+  width: 320px;
+  max-width: 100%;
+  padding: 11px 14px;
+  margin-bottom: 18px;
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  background: #fff;
+  font: inherit;
+  font-size: 14px;
+}
+.cartao {
+  background: #fff;
+  border: 1px solid var(--borda);
+  border-radius: 16px;
+  padding: 8px 24px;
+}
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.tabela th {
+  text-align: left;
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--suave);
+  padding: 16px 0 12px;
+  border-bottom: 1px solid var(--borda);
+}
+.tabela td {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--bege);
+}
+.tabela tr:last-child td {
+  border-bottom: 0;
+}
+.chip {
+  background: var(--fundo);
+  border-radius: 8px;
+  padding: 4px 10px;
+  font-size: 12px;
+  text-transform: capitalize;
+}
+.vazio {
+  text-align: center;
+  color: var(--suave);
+}
+.erro-texto,
+.msg-erro {
+  color: var(--erro);
+  font-size: 12px;
+}
+
+.fundo-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(47, 47, 45, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.modal {
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px;
+  width: 100%;
+  max-width: 440px;
+  max-height: 90vh;
+  overflow: auto;
+}
+.modal h3 {
+  margin: 0 0 18px;
+  font-size: 20px;
+}
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.formulario label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+}
+.campo {
+  padding: 11px 14px;
+  border: 1px solid var(--borda);
+  border-radius: 12px;
+  background: var(--fundo);
+  font: inherit;
+  font-size: 14px;
+}
+.campo.erro {
+  border-color: var(--erro);
+}
+.caixa-cliente {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  background: var(--fundo);
+  border-radius: 12px;
+}
+.acoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 6px;
 }
