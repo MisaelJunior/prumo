@@ -21,7 +21,7 @@ describe('validarParcelas', () => {
             {valor: 33.33, vencimento: '2026-12-20'},
             {valor: 33.34, vencimento: '2027-01-20'},
         ];
-        expect(validarParcelas(tres, '100.00')).toEqual({});
+        expect(validarParcelas(tres, 100.00)).toEqual({});
     });
     
     it('exige valor maior que zero em cada parcela', () =>{
