@@ -74,7 +74,7 @@ export default function NovoProjetoModal({onFechar, onSalvo}){
 
                 <label>
                     Valor fechado (R$)
-                    <input className={classe('valor_fechado')} type='number' step='0.01' value={form.descricao} onChange={mudar('valor_fechado')}/>
+                    <input className={classe('valor_fechado')} type='number' step='0.01' value={form.valor_fechado} onChange={mudar('valor_fechado')}/>
                     {erros.valor_fechado && <span className='msg-erro'>{erros.valor_fechado}</span>}
                 </label>
 
