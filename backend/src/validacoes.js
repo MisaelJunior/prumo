@@ -33,10 +33,10 @@ export function validarParcelas(parcelas, valorFechado){
 
     somaCentavos += Math.round(valor * 100) || 0;
 
-    if (somaCentavos += Math.round(Number(valorFechado)*100)){
-      erros.soma = "A soma das parcelas percisa ser igual ao valor do projeto";
-    }
-
-    return erros;
   }
+  if (somaCentavos !== Math.round(Number(valorFechado)*100)){
+    erros.soma = "A soma das parcelas percisa ser igual ao valor do projeto";
+  }
+
+  return erros;
 }

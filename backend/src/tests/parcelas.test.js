@@ -29,7 +29,7 @@ describe('validarParcelas', () => {
     });
 
     it('exige data de vencimento', () =>{
-        expect(validarParcelas([{valor: 6000}], 6000)).toHaveProperty('vencimento');c
+        expect(validarParcelas([{valor: 6000}], 6000)).toHaveProperty('vencimento');
     });
 
     it('recusa lista vazia', () => {
