@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { api } from '../api.js';
 import { moeda } from '../format.js';
 import NovoProjetoModal from '../components/NovoProjetoModal.jsx';
+import {Link} from 'react-router-dom';
 
 export default function Projetos() {
   const [projetos, setProjetos] = useState([]);
@@ -42,7 +43,7 @@ export default function Projetos() {
           <tbody>
             {filtrados.map((p) => (
               <tr key={p.id}>
-                <td>{p.descricao}</td>
+                <td><Link to={`/projetos/${p.id}`} className="linha-link">{p.descricao}</Link></td>
                 <td>{p.cliente}</td>
                 <td>{moeda(p.valor_fechado)}</td>
                 <td><span className="chip">{p.status}</span></td>

@@ -9,6 +9,7 @@ export default function App() {
       <Route element={<Layout />}>
         <Route path="/" element={<EmBreve titulo="Painel" />} />
         <Route path="/projetos" element={<Projetos />} />
+        <Route path="/projetos/:id" element={<ProjetoDetalhe />} />
         <Route path="/receber" element={<EmBreve titulo="A receber" />} />
         <Route path="/pagar" element={<EmBreve titulo="A pagar" />} />
         <Route path="/caixa" element={<EmBreve titulo="Fluxo de caixa" />} />

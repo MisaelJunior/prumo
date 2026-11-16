@@ -235,3 +235,70 @@ h2 {
   gap: 10px;
   margin-top: 6px;
 }
+
+.voltar {
+  display: inline-block;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: var(--suave);
+  text-decoration: none;
+}
+.linha-link {
+  color: inherit;
+  text-decoration: none;
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.cartao-numero {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: #fff;
+  border: 1px solid var(--borda);
+  border-radius: 16px;
+  padding: 20px 24px;
+}
+.cartao-numero small,
+.cartao-numero span {
+  font-size: 12px;
+  color: var(--suave);
+}
+.cartao-numero strong {
+  font-size: 26px;
+}
+.titulo-cartao {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0 4px;
+}
+.titulo-cartao h3 {
+  margin: 0;
+  font-size: 18px;
+}
+.modal-largo {
+  max-width: 600px;
+}
+.linha-parcela {
+  display: grid;
+  grid-template-columns: 1fr 120px 150px;
+  gap: 8px;
+  align-items: center;
+  font-size: 13px;
+}
+.resumo {
+  margin: 0;
+  font-size: 13px;
+}
+.ok {
+  color: #6f9a7b;
+  font-size: 12px;
+}
+.botao:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
