@@ -16,27 +16,44 @@ export function validarProjeto({cliente_id, descricao, valor_fechado}) {
   return erros;
 }
 
-export function validarParcelas(parcelas, valorFechado){
-  if(!Array.isArray(parcelas) || parcelas.length === 0){
-    return {geral: 'Informe ao menos uma parcela'};
+export function validarParcelas(parcelas, valorFechado) {
+  if (!Array.isArray(parcelas) || parcelas.length === 0) {
+    return { geral: 'Informe ao menos uma parcela' };
   }
   const erros = {};
 
   let somaCentavos = 0;
-  
-  for(const p of parcelas){
+
+  for (const p of parcelas) {
     const valor = Number(p.valor);
-    if(!(valor > 0)) { erros.valor = 'Cada parcela precisa ter um valor maior que zero'};
-    if(!p.vencimento || Number.isNaN(Date.parse(p.vencimento))){
-      erros.vencimento = ' Cada parcela precisa ter uma data de vencimento válida'
+    if (!(valor > 0)) {
+      erros.valor = 'Cada parcela precisa ter um valor maior que zero';
+    }
+    if (!p.vencimento || Number.isNaN(Date.parse(p.vencimento))) {
+      erros.vencimento =
+        ' Cada parcela precisa ter uma data de vencimento válida';
     }
 
     somaCentavos += Math.round(valor * 100) || 0;
-
   }
-  if (somaCentavos !== Math.round(Number(valorFechado)*100)){
-    erros.soma = "A soma das parcelas percisa ser igual ao valor do projeto";
+  if (somaCentavos !== Math.round(Number(valorFechado) * 100)) {
+    erros.soma = 'A soma das parcelas percisa ser igual ao valor do projeto';
   }
 
   return erros;
+}
+
+export function validarBaixa(parcela, valorRecebido) {
+  const saldo =
+    Math.round(Number(parcela.valor) * 100) -
+    Math.round(Number(parcela.valor_pago) * 100);
+
+  if (saldo <= 0) return { geral: "Esta parcela já está paga" };
+  
+  const valor = Math.round(Number(valorRecebido) * 100);
+
+  if (!(valor > 0)) return { valor: "Informe um valor maior que zero" };
+
+  if (valor > saldo) return { valor: "O valor não pode ser maior que o saldo da parcela" };
+  return {};
 }

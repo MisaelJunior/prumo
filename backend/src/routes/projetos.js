@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { pool } from '../db.js';
 import { validarProjeto,validarParcelas } from '../validacoes.js';
+import { situacaoParcela, hojeISO } from '../parcelas.js';
 
 const router = Router();
 
@@ -46,7 +47,7 @@ router.get('/:id/parcelas', async(req, res) => {
             `SELECT id, descricao, valor, valor_pago, to_char(vencimento, 'YYYY-MM-DD') AS vencimento FROM parcelas WHERE projeto_id = $1 ORDER BY vencimento, id`,
             [req.params.id]
         );
-        res.json(rows);
+        res.json(rows.map((p) => ({ ...p, situacao: situacaoParcela(p, hojeISO()) })));
     } catch (err){
         console.error(err);
         res.status(500).json({erro: 'Erro ao listar parcelas'});

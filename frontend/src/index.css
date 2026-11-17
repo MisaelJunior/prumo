@@ -313,3 +313,24 @@ h2 {
   opacity: 0.5;
   cursor: not-allowed;
 }
+.cards.tres {
+  grid-template-columns: repeat(3, 1fr);
+}
+.botao-pequeno {
+  padding: 7px 14px;
+  font-size: 13px;
+}
+.chip.situacao {
+  text-transform: none;
+}
+.chip.paga {
+  background: #e8f1ea;
+  color: #4f7a5c;
+}
+.chip.atrasada {
+  background: #f6e4e1;
+  color: #a5584d;
+}
+.chip.parcial {
+  background: var(--bege);
+}
