@@ -41,6 +41,7 @@ export default function NovoProjetoModal({onFechar, onSalvo}){
     }
 
     return(
+        <>
         <Modal titulo="Novo Projeto" onFechar={onFechar}>
             <form className='formulario' onSubmit={salvar} noValidate>
                 <label>
@@ -90,5 +91,6 @@ export default function NovoProjetoModal({onFechar, onSalvo}){
                 </div>
             </form>
         </Modal>
+        </>
     );
 }

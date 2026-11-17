@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import EmBreve from "./pages/EmBreve.jsx";
 import Projetos from "./pages/Projetos.jsx";
+import ProjetoDetalhe from "./pages/ProjetoDetalhe.jsx"
 
 export default function App() {
   return(

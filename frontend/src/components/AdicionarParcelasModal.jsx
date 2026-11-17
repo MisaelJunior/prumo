@@ -35,47 +35,49 @@ export default function AdicionarParcelasModal({ projeto, onFechar, onSalvo}){
         }
     }
     return (
-    <Modal titulo="Adicionar parcelas" onFechar={onFechar} largo>
-      <div className="formulario">
-        <p className="sub">Valor do projeto: <strong>{moeda(projeto.valor_fechado)}</strong></p>
-        <label>
-          Valor do sinal (opcional)
-          <input className="campo" type="number" step="0.01" value={sinal} onChange={(e) => setSinal(e.target.value)} />
-        </label>
-        <label>
-          Número de parcelas (do restante)
-          <input className="campo" type="number" min="1" value={numero} onChange={(e) => setNumero(e.target.value)} />
-        </label>
-        <label>
-          Primeiro vencimento
-          <input className="campo" type="date" value={primeiro} onChange={(e) => setPrimeiro(e.target.value)} />
-        </label>
-        <button type="button" className="botao-claro" onClick={gerar}>Gerar parcelas</button>
+      <>
+      <Modal titulo="Adicionar parcelas" onFechar={onFechar} largo>
+        <div className="formulario">
+          <p className="sub">Valor do projeto: <strong>{moeda(projeto.valor_fechado)}</strong></p>
+          <label>
+            Valor do sinal (opcional)
+            <input className="campo" type="number" step="0.01" value={sinal} onChange={(e) => setSinal(e.target.value)} />
+          </label>
+          <label>
+            Número de parcelas (do restante)
+            <input className="campo" type="number" min="1" value={numero} onChange={(e) => setNumero(e.target.value)} />
+          </label>
+          <label>
+            Primeiro vencimento
+            <input className="campo" type="date" value={primeiro} onChange={(e) => setPrimeiro(e.target.value)} />
+          </label>
+          <button type="button" className="botao-claro" onClick={gerar}>Gerar parcelas</button>
 
-        {linhas.length > 0 && (
-          <>
-            {linhas.map((p, i) => (
-              <div className="linha-parcela" key={i}>
-                <span>{p.descricao}</span>
-                <input className="campo" type="number" step="0.01" value={p.valor}
-                  onChange={(e) => editar(i, 'valor', e.target.value)} />
-                <input className="campo" type="date" value={p.vencimento}
-                  onChange={(e) => editar(i, 'vencimento', e.target.value)} />
-              </div>
-            ))}
-            <p className="resumo">Soma das parcelas: <strong>{moeda(soma / 100)}</strong></p>
-            {confere
-              ? <span className="ok">A soma bate com o valor do projeto</span>
-              : <span className="msg-erro">A soma precisa ser igual ao valor do projeto</span>}
-          </>
-        )}
+          {linhas.length > 0 && (
+            <>
+              {linhas.map((p, i) => (
+                <div className="linha-parcela" key={i}>
+                  <span>{p.descricao}</span>
+                  <input className="campo" type="number" step="0.01" value={p.valor}
+                    onChange={(e) => editar(i, 'valor', e.target.value)} />
+                  <input className="campo" type="date" value={p.vencimento}
+                    onChange={(e) => editar(i, 'vencimento', e.target.value)} />
+                </div>
+              ))}
+              <p className="resumo">Soma das parcelas: <strong>{moeda(soma / 100)}</strong></p>
+              {confere
+                ? <span className="ok">A soma bate com o valor do projeto</span>
+                : <span className="msg-erro">A soma precisa ser igual ao valor do projeto</span>}
+            </>
+          )}
 
-        {Object.values(erros).map((m) => <span className="msg-erro" key={m}>{m}</span>)}
-        <div className="acoes">
-          <button type="button" className="botao-claro" onClick={onFechar}>Cancelar</button>
-          <button type="button" className="botao" onClick={salvar} disabled={!confere}>Salvar</button>
+          {Object.values(erros).map((m) => <span className="msg-erro" key={m}>{m}</span>)}
+          <div className="acoes">
+            <button type="button" className="botao-claro" onClick={onFechar}>Cancelar</button>
+            <button type="button" className="botao" onClick={salvar} disabled={!confere}>Salvar</button>
+          </div>
         </div>
-      </div>
-    </Modal>
-  );
+      </Modal>
+      </>
+    );
 }
