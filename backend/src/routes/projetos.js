@@ -29,24 +29,26 @@ router.post('/', async (req, res) => {
 router.get('/:id', async(req, res) => {
     try{
         const{rows}= await pool.query(
-            `SELECT p.id, p.descricao, p.valor_fechado, p.status, c.nome AS cliente FROM projetos p JOIN cliente c ON c.id =p.cliente_id WHERE p.id = $1`,
+            `SELECT p.id, p.descricao, p.valor_fechado, p.status, c.nome AS cliente FROM projetos p JOIN clientes c ON c.id =p.cliente_id WHERE p.id = $1`,
             [req.params.id]
         );
         if (!rows.length) return res.status(404).json({erro: 'Projeto não encontrado'});
         res.json(rows[0]);
-    } catch {
-        res.status(500),json({erro: 'Erro ao buscar projeto'});
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({erro: 'Erro ao buscar projeto'});
     }
 });
 
 router.get('/:id/parcelas', async(req, res) => {
     try{
         const {rows} = await pool.query(
-            `SELECT id, descricao, valor, valor_pago, to_char(vencimento, 'YYYY-MM-DD') AS vencimento FROM parcelas WHERE porjeto_id = $1 ORDER BY vencimento, id`,
+            `SELECT id, descricao, valor, valor_pago, to_char(vencimento, 'YYYY-MM-DD') AS vencimento FROM parcelas WHERE projeto_id = $1 ORDER BY vencimento, id`,
             [req.params.id]
         );
         res.json(rows);
-    } catch {
+    } catch (err){
+        console.error(err);
         res.status(500).json({erro: 'Erro ao listar parcelas'});
     }
 });
@@ -78,7 +80,8 @@ router.post('/:id/parcelas', async(req, res) => {
         }
         await conexao.query('COMMIT');
         res.status(201).json({ok: true});
-    }catch{
+    }catch (err){
+        console.error(err);
         if (conexao) await conexao.query('ROLLBACK').catch(() => {});
         res.status(500).json({erros: 'Erro ao salvar parcelas'});
     } finally{
