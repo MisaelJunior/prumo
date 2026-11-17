@@ -188,6 +188,17 @@ h2 {
 }
 .modal {
   background: #fff;
+  background-color: #f3ede2;
+  border-radius: 16px;
+  padding: 28px;
+  width: 100%;
+  max-width: 440px;
+  max-height: 90vh;
+  overflow: auto;
+}
+.modalmodal-largo {
+  background: #fff;
+  background-color: #f3ede2;
   border-radius: 16px;
   padding: 28px;
   width: 100%;
