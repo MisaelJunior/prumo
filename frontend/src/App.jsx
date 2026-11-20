@@ -3,6 +3,7 @@ import Layout from "./components/Layout";
 import EmBreve from "./pages/EmBreve.jsx";
 import Projetos from "./pages/Projetos.jsx";
 import ProjetoDetalhe from "./pages/ProjetoDetalhe.jsx"
+import AReceber from "./pages/AReceber.jsx";
 
 export default function App() {
   return(
@@ -11,7 +12,7 @@ export default function App() {
         <Route path="/" element={<EmBreve titulo="Painel" />} />
         <Route path="/projetos" element={<Projetos />} />
         <Route path="/projetos/:id" element={<ProjetoDetalhe />} />
-        <Route path="/receber" element={<EmBreve titulo="A receber" />} />
+        <Route path="/receber" element={<AReceber />} />
         <Route path="/pagar" element={<EmBreve titulo="A pagar" />} />
         <Route path="/caixa" element={<EmBreve titulo="Fluxo de caixa" />} />
         <Route path="/relatorios" element={<EmBreve titulo="Relatorios" />} />
