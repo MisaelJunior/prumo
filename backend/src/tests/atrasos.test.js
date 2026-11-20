@@ -8,6 +8,7 @@ const parcela = (extra) => ({
     projeto_id:10,
     cliente: 'Maria',
     projeto: 'Armário de cozinha',
+    descricao: 'Parcela 2 de 3',
     valor: '1000.00',
     valor_pago: '0.00',
     vencimento: '2026-11-10',
@@ -45,6 +46,7 @@ describe ('listarAtrasadas', () =>{
         expect(resultado).toHaveLength(1);
         expect(resultado[0].cliente).toBe('Maria');
         expect(resultado[0].projeto).toBe('Armário de cozinha');
+        expect(resultado[0].descricao).toBe('Parcela 2 de 3');
         expect(resultado[0].valor_em_aberto).toBe(1000);
         expect(resultado[0].dias_atraso).toBe(8);
     });
