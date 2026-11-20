@@ -1,0 +1,6 @@
+CREATE TABLE usuarios (
+  id SERIAL PRIMARY KEY,
+  usuario TEXT NOT NULL UNIQUE,
+  senha_hash TEXT NOT NULL,
+  criado_em TIMESTAMPTZ NOT NULL DEFAULT now()
+);
