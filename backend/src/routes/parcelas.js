@@ -34,7 +34,7 @@ router.get('/atrasadas', async (req, res) => {
   try {
       const hoje = hojeISO();
       const { rows } = await pool.query(
-        `SELECT pa.id, pa.projeto_id, pa.valor, pa.valor_pago, to_char(pa.vencimento, 'YYYY-MM-DD') AS vencimento, c.nome AS cliente, p.descricao AS projeto FROM parcelas pa JOIN projetos p ON pa.projeto_id = p.id JOIN clientes c ON p.cliente_id = c.id WHERE pa.valor_pago < pa.valor AND pa.vencimento < $1`,
+        `SELECT pa.id, pa.projeto_id, pa.descricao, pa.valor, pa.valor_pago, to_char(pa.vencimento, 'YYYY-MM-DD') AS vencimento, c.nome AS cliente, p.descricao AS projeto FROM parcelas pa JOIN projetos p ON pa.projeto_id = p.id JOIN clientes c ON p.cliente_id = c.id WHERE pa.valor_pago < pa.valor AND pa.vencimento < $1`,
         [hoje]
       );
       res.json(listarAtrasadas(rows, hoje));
