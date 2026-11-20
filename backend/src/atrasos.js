@@ -25,6 +25,7 @@ export function listarAtrasadas(parcelas, hoje){
             projeto_id: p.projeto_id,
             cliente: p.cliente,
             projeto: p.projeto,
+            descricao: p.descricao,
             vencimento: p.vencimento,
             valor_em_aberto: valorEmAberto(p.valor, p.valor_pago),
             dias_atraso: diasDeAtraso(p.vencimento, hoje),
