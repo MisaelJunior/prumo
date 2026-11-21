@@ -57,3 +57,33 @@ export function validarBaixa(parcela, valorRecebido) {
   if (valor > saldo) return { valor: "O valor não pode ser maior que o saldo da parcela" };
   return {};
 }
+
+export function validarDespesaProjeto({descricao, valor, data, categoria}){
+  const erros = {};
+  const categoriasPermitidas = ['material', 'frete', 'tercerizados', 'outros'];
+
+  function dataValida(texto) {
+    if (typeof texto !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(texto)) return false;
+    const [ano, mes, dia] = texto.split('-').map(Number);
+    const d = new Date(Date.UTC(ano, mes - 1, dia));
+    return d.getUTCFullYear() === ano && d.getUTCMonth() === mes - 1 && d.getUTCDate() === dia;
+  }
+
+  if (!descricao || !String(descricao).trim()) {
+    erros.descricao = 'Campo obrigatório';
+  }
+
+  if (!(Number(valor) > 0)) {
+    erros.valor = 'Valor inválido';
+  }
+
+  if(!dataValida(data)){
+    erros.data = 'informe uma data válida'
+  }
+
+  if (categoria != null && categoria !== '' && !categoriasPermitidas.includes(categoria)){
+    erros.categoria = 'Escolha uma categoria da lista';
+  }
+
+  return erros
+}

@@ -25,7 +25,7 @@ describe('validarDespesaProjeto', () => {
         expect(validarDespesaProjeto({ ...valida, valor: 0 })).toHaveProperty('valor');
     });
     it('recusa valor negativo', () => {
-        expect(validarDespesaProjeto({ ...valida, valor: -5 })).toHaveProperty('descricao');
+        expect(validarDespesaProjeto({ ...valida, valor: -5 })).toHaveProperty('valor');
     });
     it('recusa valor vazio ou em texto', () => {
         expect(validarDespesaProjeto({ ...valida, valor: '' })).toHaveProperty('valor');
@@ -50,10 +50,10 @@ describe('validarDespesaProjeto', () => {
         }
     });
     it('recusa categoria fora da lista', () =>{
-        expect(validarDespesaProjeto({...valida, data:'viagem'})).toHaveProperty('categoria');
+        expect(validarDespesaProjeto({...valida, categoria:'viagem'})).toHaveProperty('categoria');
     });
     it('aceita despesa sem categoria', () =>{
-        expect(validarDespesaProjeto({...valida, data:undefined})).toEqual({});
+        expect(validarDespesaProjeto({...valida, categoria:undefined})).toEqual({});
     });
     
     
