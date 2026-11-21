@@ -53,7 +53,9 @@ export default function LancarDespesaModal({ projeto, onFechar, onSalvo }) {
         <label>
           Categoria
           <select className="campo" value={categoria} onChange={(e) => setCategoria(e.target.value)}>
-            {categoriasPermitidas}
+            {categoriasPermitidas.map((c) => (
+              <option key={c.valor} value={c.valor}>{c.nome}</option>
+            ))}
           </select>
         </label>
 
