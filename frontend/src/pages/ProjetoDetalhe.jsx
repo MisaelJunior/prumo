@@ -4,6 +4,8 @@ import { api } from '../api.js';
 import { moeda, dataBR } from '../format.js';
 import AdicionarParcelasModal from '../components/AdicionarParcelasModal.jsx';
 import DarBaixaModal from '../components/DarBaixaModal.jsx';
+import LancarDespesaModal from '../components/LancarDespesaModal.jsx'; // US06
+import { nomeCategoria } from '../despesas.js'; // US06
 
 const rotulo = { paga: 'Pago', atrasada: 'Atrasado', parcial: 'Parcial', 'em aberto': 'Em aberto' };
 
@@ -11,14 +13,20 @@ export default function ProjetoDetalhe() {
   const { id } = useParams();
   const [projeto, setProjeto] = useState(null);
   const [parcelas, setParcelas] = useState([]);
+  const [despesas, setDespesas] = useState([]); // US06
   const [aberto, setAberto] = useState(false);
   const [baixa, setBaixa] = useState(null);
+  const [lancando, setLancando] = useState(false); // US06
   const [erro, setErro] = useState('');
   const [versao, setVersao] = useState(0);
 
   useEffect(() => {
-    Promise.all([api(`/api/projetos/${id}`), api(`/api/projetos/${id}/parcelas`)])
-      .then(([p, ps]) => { setProjeto(p); setParcelas(ps); })
+    Promise.all([
+      api(`/api/projetos/${id}`),
+      api(`/api/projetos/${id}/parcelas`),
+      api(`/api/projetos/${id}/despesas`), // US06
+    ])
+      .then(([p, ps, ds]) => { setProjeto(p); setParcelas(ps); setDespesas(ds); }) // US06
       .catch(() => setErro('Não foi possível carregar o projeto.'));
   }, [id, versao]);
 
@@ -90,6 +98,36 @@ export default function ProjetoDetalhe() {
         </table>
       </div>
 
+      <div className="cartao">
+        <div className="titulo-cartao">
+          <h3>Despesas</h3>
+          <button className="botao" onClick={() => setLancando(true)}>+ Lançar despesa</button>
+        </div>
+        <table className="tabela">
+          <thead>
+            <tr><th>Descrição</th><th>Categoria</th><th>Data</th><th>Valor</th><th>Situação</th></tr>
+          </thead>
+          <tbody>
+            {despesas.map((d) => (
+              <tr key={d.id}>
+                <td>{d.descricao}</td>
+                <td>{nomeCategoria(d.categoria)}</td>
+                <td>{dataBR(d.data)}</td>
+                <td>{moeda(d.valor)}</td>
+                <td>
+                  {d.paga
+                    ? <span className="chip situacao paga">Paga</span>
+                    : <span className="chip situacao em-aberto">Em aberto</span>}
+                </td>
+              </tr>
+            ))}
+            {despesas.length === 0 && (
+              <tr><td colSpan="5" className="vazio">Nenhuma despesa lançada.</td></tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+
       {aberto && (
         <AdicionarParcelasModal
           projeto={projeto}
@@ -102,6 +140,13 @@ export default function ProjetoDetalhe() {
           parcela={baixa}
           onFechar={() => setBaixa(null)}
           onSalvo={() => { setBaixa(null); setVersao((v) => v + 1); }}
+        />
+      )}
+      {lancando && (
+        <LancarDespesaModal
+          projeto={projeto}
+          onFechar={() => setLancando(false)}
+          onSalvo={() => { setLancando(false); setVersao((v) => v + 1); }}
         />
       )}
     </>
