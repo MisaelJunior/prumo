@@ -60,7 +60,7 @@ export function validarBaixa(parcela, valorRecebido) {
 
 export function validarDespesaProjeto({descricao, valor, data, categoria}){
   const erros = {};
-  const categoriasPermitidas = ['material', 'frete', 'tercerizados', 'outros'];
+  const categoriasPermitidas = ['material', 'frete', 'terceirizado', 'outros'];
 
   function dataValida(texto) {
     if (typeof texto !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(texto)) return false;

@@ -45,7 +45,7 @@ describe('validarDespesaProjeto', () => {
 
     //categoria
     it('aceita todas as categorias prevista', () => {
-        for (const categoria of ['material', 'frete', 'tercerizados', 'outros']) {
+        for (const categoria of ['material', 'frete', 'terceirizado', 'outros']) {
             expect(validarDespesaProjeto({ ...valida, categoria})).toEqual({});
         }
     });
