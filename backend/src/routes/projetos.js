@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { pool } from '../db.js';
-import { validarProjeto,validarParcelas } from '../validacoes.js';
+import { validarProjeto,validarParcelas, validarDespesaProjeto } from '../validacoes.js';
 import { situacaoParcela, hojeISO } from '../parcelas.js';
 
 const router = Router();
@@ -87,6 +87,30 @@ router.post('/:id/parcelas', async(req, res) => {
         res.status(500).json({erros: 'Erro ao salvar parcelas'});
     } finally{
         if(conexao) conexao.release();
+    }
+});
+
+router.post('/:id/despesas', async (req, res) => {
+    const erros = validarDespesaProjeto(req.body);
+    if (Object.keys(erros).length) return res.status(400).json({ erros });
+
+    if (!/^\d{1,9}$/.test(req.params.id)) return res.status(404).json({ erro: 'Projeto não encontrado' });
+
+    try {
+        const existe = await pool.query('SELECT 1 FROM projetos WHERE id = $1', [req.params.id]);
+        if (!existe.rowCount) return res.status(404).json({ erro: 'Projeto não encontrado' });
+
+        const { descricao, valor, data, categoria, paga } = req.body;
+        const { rows } = await pool.query(
+            `INSERT INTO despesas (tipo, projeto_id, categoria, descricao, valor, data, paga)
+             VALUES ('projeto', $1, $2, $3, $4, $5, $6)
+             RETURNING id, categoria, descricao, valor, paga, to_char(data, 'YYYY-MM-DD') AS data`,
+            [req.params.id, categoria || 'outros', String(descricao).trim(), valor, data, paga === true]
+        );
+        res.status(201).json(rows[0]);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ erro: 'Erro ao salvar despesa' });
     }
 });
 
