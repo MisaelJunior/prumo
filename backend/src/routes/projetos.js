@@ -90,6 +90,21 @@ router.post('/:id/parcelas', async(req, res) => {
     }
 });
 
+router.get('/:id/despesas', async (req, res) => {
+    if (!/^\d{1,9}$/.test(req.params.id)) return res.status(404).json({ erro: 'Projeto não encontrado' });
+
+    try {
+        const { rows } = await pool.query(
+            `SELECT id, categoria, descricao, valor, paga, to_char(data, 'YYYY-MM-DD') AS data  FROM despesas WHERE projeto_id = $1 ORDER BY data DESC, id DESC`,
+            [req.params.id]
+        );
+        res.json(rows);
+    }catch(err){
+        console.error(err);
+        res.status(500).json({erro: 'Erro ao listar despesas'});
+    }
+});
+
 router.post('/:id/despesas', async (req, res) => {
     const erros = validarDespesaProjeto(req.body);
     if (Object.keys(erros).length) return res.status(400).json({ erros });
