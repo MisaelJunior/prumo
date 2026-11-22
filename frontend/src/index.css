@@ -59,6 +59,11 @@ body {
   font-weight: 600;
 }
 .usuario {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.usuario strong {
   font-size: 14px;
   font-weight: 500;
 }
@@ -343,4 +348,20 @@ h2 {
 
 .cartao + .cartao {
   margin-top: 24px;
+}
+
+.login-pagina {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.login-cartao {
+  background: #fff;
+  border: 1px solid var(--borda);
+  border-radius: 20px;
+  padding: 36px;
+  width: 100%;
+  max-width: 400px;
 }
