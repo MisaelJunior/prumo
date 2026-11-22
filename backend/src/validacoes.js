@@ -58,16 +58,17 @@ export function validarBaixa(parcela, valorRecebido) {
   return {};
 }
 
-export function validarDespesaProjeto({descricao, valor, data, categoria}){
-  const erros = {};
-  const categoriasPermitidas = ['material', 'frete', 'terceirizado', 'outros'];
-
-  function dataValida(texto) {
+function dataValida(texto) {
     if (typeof texto !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(texto)) return false;
     const [ano, mes, dia] = texto.split('-').map(Number);
     const d = new Date(Date.UTC(ano, mes - 1, dia));
     return d.getUTCFullYear() === ano && d.getUTCMonth() === mes - 1 && d.getUTCDate() === dia;
   }
+
+export function validarDespesaProjeto({descricao, valor, data, categoria}){
+  const erros = {};
+  const categoriasPermitidas = ['material', 'frete', 'terceirizado', 'outros'];
+
 
   if (!descricao || !String(descricao).trim()) {
     erros.descricao = 'Campo obrigatório';
