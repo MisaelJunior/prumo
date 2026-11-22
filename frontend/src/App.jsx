@@ -10,8 +10,9 @@ import RotaProtegida from "./components/RotaProtegida.jsx";
 export default function App() {
   return(
     <Routes>
-      <Route element={<RotaProtegida><Layout /></RotaProtegida>}>
         <Route path="/login" element={<Login />} />
+
+        <Route element={<RotaProtegida><Layout /></RotaProtegida>}>
         <Route path="/" element={<EmBreve titulo="Painel" />} />
         <Route path="/projetos" element={<Projetos />} />
         <Route path="/projetos/:id" element={<ProjetoDetalhe />} />
