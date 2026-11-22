@@ -88,3 +88,28 @@ export function validarDespesaProjeto({descricao, valor, data, categoria}){
 
   return erros
 }
+
+export function validarDespesaFixa({ descricao, valor, vencimento, repetir_meses }) {
+  const erros = {};
+
+  if (!descricao || !String(descricao).trim()) {
+    erros.descricao = 'Campo obrigatório';
+  }
+
+  if (!(Number(valor) > 0)) {
+    erros.valor = 'Valor inválido';
+  }
+
+  if (!dataValida(vencimento)) {
+    erros.vencimento = 'Informe um vencimento válido';
+  }
+
+  if (repetir_meses != null && repetir_meses !== '') {
+    const meses = Number(repetir_meses);
+    if (!Number.isInteger(meses) || meses < 1 || meses > 60) {
+      erros.repetir_meses = 'Use um número inteiro de 1 a 60';
+    }
+  }
+
+  return erros;
+}
