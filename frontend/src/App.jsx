@@ -4,11 +4,14 @@ import EmBreve from "./pages/EmBreve.jsx";
 import Projetos from "./pages/Projetos.jsx";
 import ProjetoDetalhe from "./pages/ProjetoDetalhe.jsx"
 import AReceber from "./pages/AReceber.jsx";
+import Login from "./pages/Login.jsx";
+import RotaProtegida from "./components/RotaProtegida.jsx";
 
 export default function App() {
   return(
     <Routes>
-      <Route element={<Layout />}>
+      <Route element={<RotaProtegida><Layout /></RotaProtegida>}>
+        <Route path="/login" element={<Login />} />
         <Route path="/" element={<EmBreve titulo="Painel" />} />
         <Route path="/projetos" element={<Projetos />} />
         <Route path="/projetos/:id" element={<ProjetoDetalhe />} />
