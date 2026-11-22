@@ -12,4 +12,4 @@ describe('POST /api/login', () => {
         const r = await request(app).post('/api/login').send({usuario: 'admin'});
         expect(r.status).toBe(400);
     });
-})
+});
