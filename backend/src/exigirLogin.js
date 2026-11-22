@@ -1,4 +1,4 @@
-import { verificarToken } from "./auth";
+import { verificarToken } from "./auth.js";
 
 export function exigirLogin(req, res, next){
     const cabecalho = req.headers.authorization || '';
