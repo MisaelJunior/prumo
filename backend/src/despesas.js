@@ -18,3 +18,22 @@ export function gerarVencimentosMensais(vencimento, quantidade = 1) {
 
     return datas;
 }
+
+export function situacaoDespesa({paga, data}, hoje) {
+  if (paga) return 'paga';
+  return data < hoje ? 'atrasada' : 'em aberto';
+}
+
+const centavos = (valor) => Math.round(Number(valor) * 100);
+
+export function resumirDespesas(despesas, hoje) {
+  const abertas = despesas.filter((d) => !d.paga);
+  const atrasadas = despesas.filter((d) => d.data < hoje);
+  const somar = (lista) => lista.reduce((soma, d) => soma + centavos(d.valor), 0) / 100;
+
+  return {
+    total_em_aberto: somar(abertas),
+    quantidade_em_aberto: abertas.length,
+    atrasadas: { quantidade: atrasadas.length, total: somar(atrasadas)},
+  };
+}
