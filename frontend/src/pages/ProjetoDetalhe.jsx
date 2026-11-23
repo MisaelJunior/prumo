@@ -64,6 +64,19 @@ export default function ProjetoDetalhe() {
         </div>
       </div>
 
+      {/* US08: custo total e lucro do projeto */}
+      <div className="cards">
+        <div className="cartao-numero">
+          <small>Custo total</small>
+          <strong>{moeda(projeto.custo_total)}</strong>
+        </div>
+        <div className="cartao-numero">
+          <small>Lucro</small>
+          <strong>{moeda(projeto.lucro)}</strong>
+          <span>Valor fechado menos custo total</span>
+        </div>
+      </div>
+
       <div className="cartao">
         <div className="titulo-cartao">
           <h3>Parcelas</h3>

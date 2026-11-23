@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { pool } from '../db.js';
 import { validarProjeto,validarParcelas, validarDespesaProjeto } from '../validacoes.js';
 import { situacaoParcela, hojeISO } from '../parcelas.js';
+import { calcularLucro } from '../lucro.js'; // US08
 
 const router = Router();
 
@@ -34,7 +35,10 @@ router.get('/:id', async(req, res) => {
             [req.params.id]
         );
         if (!rows.length) return res.status(404).json({erro: 'Projeto não encontrado'});
-        res.json(rows[0]);
+
+        // US08: custo total e lucro, calculados na hora com as despesas do projeto
+        const despesas = await pool.query('SELECT valor FROM despesas WHERE projeto_id = $1', [req.params.id]);
+        res.json({ ...rows[0], ...calcularLucro(rows[0].valor_fechado, despesas.rows) });
     } catch (err) {
         console.error(err);
         res.status(500).json({erro: 'Erro ao buscar projeto'});
