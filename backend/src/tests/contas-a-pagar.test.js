@@ -64,6 +64,12 @@ describe('resumirDespesas', () => {
 
         expect(resumirDespesas(lista, hoje).total_em_aberto).toBe(0.3);
     });
+    it('despesa paga e vencida não conta como atrasada', () => {
+        const r = resumirDespesas([despesa({ data: '2026-11-01', valor: '900.00', paga: true })], hoje);
+
+        expect(r.atrasadas).toEqual({ quantidade: 0, total: 0 });
+        expect(r.quantidade_em_aberto).toBe(0);
+    });
     it('a que vence hoje não conta como atrasada', () => {
         const r = resumirDespesas([despesa({ data: hoje })], hoje);
 
