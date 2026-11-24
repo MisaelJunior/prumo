@@ -58,16 +58,17 @@ export function validarBaixa(parcela, valorRecebido) {
   return {};
 }
 
-export function validarDespesaProjeto({descricao, valor, data, categoria}){
-  const erros = {};
-  const categoriasPermitidas = ['material', 'frete', 'terceirizado', 'outros'];
-
-  function dataValida(texto) {
+function dataValida(texto) {
     if (typeof texto !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(texto)) return false;
     const [ano, mes, dia] = texto.split('-').map(Number);
     const d = new Date(Date.UTC(ano, mes - 1, dia));
     return d.getUTCFullYear() === ano && d.getUTCMonth() === mes - 1 && d.getUTCDate() === dia;
   }
+
+export function validarDespesaProjeto({descricao, valor, data, categoria}){
+  const erros = {};
+  const categoriasPermitidas = ['material', 'frete', 'terceirizado', 'outros'];
+
 
   if (!descricao || !String(descricao).trim()) {
     erros.descricao = 'Campo obrigatório';
@@ -86,4 +87,29 @@ export function validarDespesaProjeto({descricao, valor, data, categoria}){
   }
 
   return erros
+}
+
+export function validarDespesaFixa({ descricao, valor, vencimento, repetir_meses }) {
+  const erros = {};
+
+  if (!descricao || !String(descricao).trim()) {
+    erros.descricao = 'Campo obrigatório';
+  }
+
+  if (!(Number(valor) > 0)) {
+    erros.valor = 'Valor inválido';
+  }
+
+  if (!dataValida(vencimento)) {
+    erros.vencimento = 'Informe um vencimento válido';
+  }
+
+  if (repetir_meses != null && repetir_meses !== '') {
+    const meses = Number(repetir_meses);
+    if (!Number.isInteger(meses) || meses < 1 || meses > 60) {
+      erros.repetir_meses = 'Use um número inteiro de 1 a 60';
+    }
+  }
+
+  return erros;
 }

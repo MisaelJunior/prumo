@@ -286,6 +286,16 @@ h2 {
 .cartao-numero strong {
   font-size: 26px;
 }
+.cartao-resumo-pagar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border: 1px solid var(--borda);
+  border-radius: 16px;
+  padding: 24px 28px;
+  margin-bottom: 24px;
+}
 .titulo-cartao {
   display: flex;
   justify-content: space-between;

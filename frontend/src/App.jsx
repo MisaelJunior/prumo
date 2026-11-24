@@ -4,6 +4,7 @@ import EmBreve from "./pages/EmBreve.jsx";
 import Projetos from "./pages/Projetos.jsx";
 import ProjetoDetalhe from "./pages/ProjetoDetalhe.jsx"
 import AReceber from "./pages/AReceber.jsx";
+import APagar from "./pages/APagar.jsx";
 import Login from "./pages/Login.jsx";
 import RotaProtegida from "./components/RotaProtegida.jsx";
 
@@ -17,7 +18,7 @@ export default function App() {
         <Route path="/projetos" element={<Projetos />} />
         <Route path="/projetos/:id" element={<ProjetoDetalhe />} />
         <Route path="/receber" element={<AReceber />} />
-        <Route path="/pagar" element={<EmBreve titulo="A pagar" />} />
+        <Route path="/pagar" element={<APagar />} />
         <Route path="/caixa" element={<EmBreve titulo="Fluxo de caixa" />} />
         <Route path="/relatorios" element={<EmBreve titulo="Relatorios" />} />
       </Route>
