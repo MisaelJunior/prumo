@@ -21,8 +21,8 @@ Pequenos negócios que vendem sob encomenda costumam controlar o dinheiro em cad
 - [x] Baixa total ou parcial de parcelas
 - [x] Login com usuário e senha
 - [x] Parcelas atrasadas
-- [ ] Despesas de projeto e despesas fixas
-- [ ] Lucro por projeto
+- [x] Despesas de projeto e despesas fixas
+- [x] Lucro por projeto
 - [ ] Painel com total a receber, total a pagar e saldo previsto
 - [ ] Fluxo de caixa mensal
 - [ ] Exportação do resultado do mês em PDF
